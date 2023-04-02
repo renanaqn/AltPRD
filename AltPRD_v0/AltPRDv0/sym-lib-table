@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "componentes_altprd")(type "KiCad")(uri "${KIPRJMOD}/pcb libraries/componentes_altprd.kicad_sym")(options "")(descr ""))
+  (lib (name "ESP32-DEVKIT-V1")(type "KiCad")(uri "${KIPRJMOD}/pcb libraries/ESP32-DEVKIT-V1.kicad_sym")(options "")(descr ""))
+)

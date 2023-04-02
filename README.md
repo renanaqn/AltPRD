@@ -4,7 +4,7 @@ Desenvolvimento do projeto de Altímetro PRD
 Última revisão: 02/04 às 20h
 
 ## Como está até agora: 
-![SCH1](AltPRD/AltPRD_v0/AltPRDv0/SCH1.png)
+![SCH1](AltPRD_v0/AltPRDv0/SCH1.png)
 
 ![PCB1](AltPRD/AltPRD_v0/AltPRDv0/PCB1.png)
 

@@ -8,12 +8,14 @@
 
 uint32_t floatAddr;
 bool ligada=false;
+bool ler=false;
+int i=0;
 long timeini=0;
 String header;
 unsigned long currentTime = millis();
 unsigned long previousTime = 0; 
 const long timeoutTime = 2000;
-const char* ssid = "SCD";
+const char* ssid = "Avionica";
 const char* password = "123456789";
 static uint8_t CoreZero = 0;
 static uint8_t CoreOne  = 1;
@@ -60,10 +62,12 @@ void setup() {
 
 void coleta(){
   // Uma estimativa de 1045000 dados podem ser lidos durante aproximadamente 25min
+  //Serial.println("oie 1");
   if (floatAddr>4180000)ligada=false;
+  //Serial.println("oie 2");
   if(ligada==true){
     floatAddr = flash.getAddress(sizeof(float));
-    float alt = bmp.readAltitude(1013.25);
+    float alt = bmp.readAltitude(1014.2);
     flash.writeFloat(floatAddr, alt);
     Serial.print("Float Address ");
     Serial.println(floatAddr/4);
@@ -77,6 +81,22 @@ void reset_memory(){
     }
     Serial.print("Memory reset erro");
 }
+
+void ler_dados (){
+    //Serial.println("oie 1");
+    if (i>1045000)ler=false;
+    //Serial.println("oie 2");
+    if (ler==true){ 
+      float valor = flash.readFloat(i);
+      Serial.println("End: ");
+      Serial.println(i);
+      Serial.println("Valor: ");
+      Serial.println(valor);
+      delay(10);
+      i=i+4;
+      //Serial.println("oie 3");
+      }
+    }
 
 void loop() {
 }

@@ -30,6 +30,12 @@ void loopCore1(void *arg ){
                   ligada=false;
                 } else if (header.indexOf("GET /reset") >= 0) {
                    reset_memory();
+                } else if (header.indexOf("GET /ler_dados/true") >= 0) {
+                   ler=true;
+                   //ler_dados();
+                } else if (header.indexOf("GET /ler_dados/false") >= 0) {
+                   ler=false;
+                   //ler_dados();
                 }
                 
                 // Display the HTML web page
@@ -54,8 +60,16 @@ void loopCore1(void *arg ){
                 } else {
                   client.println("<p><a href=\"/ligada/false\"><button class=\"button button2\">OFF</button></a></p>");
                 } 
-                 client.println("<p> Apagar toda a memoria</p>");
-                 client.println("<p><a href=\"/reset\"><button class=\"button\">Reset</button></a></p>");
+                client.println("<p> Apagar toda a memoria</p>");
+                client.println("<p><a href=\"/reset\"><button class=\"button\">Reset</button></a></p>");
+
+
+                client.println("<p> Ler Dados -  " + String(ler?"Lendo":"Nao Lendo") + "</p>");
+                  if (ler==false) {
+                    client.println("<p><a href=\"/ler_dados/true\"><button class=\"button\">Comecar Leitura</button></a></p>");
+                  } else {
+                    client.println("<p><a href=\"/ler_dados/false\"><button class=\"button button2\">Parar Leitura</button></a></p>");
+                  } 
                 
                 client.println("</body></html>");
                 

@@ -35,6 +35,7 @@ void loopCore1(void *arg ){
                    //ler_dados();
                 } else if (header.indexOf("GET /ler_dados/false") >= 0) {
                    ler=false;
+                   i =0;
                    //ler_dados();
                 }
                 

@@ -4,21 +4,23 @@
 #include<SPIMemory.h> 
 #include <WiFi.h> 
 #include "BluetoothSerial.h" 
+#include <ESP32Servo.h>
 
 #define flashCS 5 
-#define pressaoNivelMar = 1012
+#define pressaoNivelMar 1012
+#define pinServo 13
 
 #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED) 
 #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it 
 #endif 
+Servo servo;
 
-float valores1[10];
-float valores2[10];
 uint32_t floatAddr;
-bool ligada = false;
+float alt = 0, alt_ant=0,alt_inicial=0;
+bool ligada = true;
 bool ler = false;
-int i = 0;
-long timeini = 0;
+int i = 0, cont_eject = 0;
+long timeini = 0,cont_test=0;
 String header;
 unsigned long currentTime = millis();
 unsigned long previousTime = 0;
@@ -34,14 +36,14 @@ BluetoothSerial SerialBT;
 WiFiServer server(80); 
 
 void setup() { 
-  pinMode(LED,OUTPUT);
   pinMode(0, INPUT_PULLUP); 
   Serial.begin(115200); 
   xTaskCreatePinnedToCore(loopCore0, "coreTaskZero", 10000, NULL, 1, NULL, CoreZero); 
   delay(500); 
   xTaskCreatePinnedToCore(loopCore1, "coreTaskZero", 10000, NULL, 1, NULL, CoreOne); 
   delay(500); 
-
+  servo.attach(pinServo);
+  servo.write(50);
   while (!bmp.begin(0x76)) { 
     Serial.println("Erro no BMP");
     delay(100); 
@@ -83,21 +85,6 @@ void writeString(String stringData){
   }
 }
 
-void coleta() {
-  // Uma estimativa de 1045000 dados podem ser lidos durante aproximadamente 25min
-  if (floatAddr > 4180000)ligada = false;
-  if (ligada == true) {
-    floatAddr = flash.getAddress(sizeof(float)); 
-    delay(40);
-    flash.writeFloat(floatAddr, currentTime); 
-    Serial.print("Tempo: "); 
-    floatAddr = flash.getAddress(sizeof(float)); 
-    flash.writeFloat(floatAddr, alt); 
-    Serial.print("Float Address "); 
-    Serial.println(floatAddr / 4);     
-    Serial.println("Valor: " + String(flash.readFloat(floatAddr)));
-  }
-}
 void reset_memory() {
   if (flash.eraseChip()) {
     Serial.print("Memory reset");
@@ -109,7 +96,7 @@ void reset_memory() {
 void ler_dados () {
   if (i > 4180000)ler = false; 
   if (ler == true) {
-    float valor = flash.readFloat(i);
+    float valor = flash.readFloat(i); 
     Serial.print("End: ");
     Serial.println(i/4);
     //Serial.print("Tempo: ");
@@ -121,15 +108,6 @@ void ler_dados () {
     i = i + 4;
   }
 }
-/*
-void ejecao (){
-  if (media2 < media1) {
-    //comandar servo 5 vezes com delay de 50 ms
-  } else {
-    valores1[i] = bmp.readAltitude(1014.2); 
-    valores2[i] = bmp.readAltitude(1014.2); 
-    media2 += valores1
-  } 
-} */
+
 void loop() {
 }

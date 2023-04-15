@@ -1,6 +1,16 @@
 void loopCore1(void *arg ){
   while(true){
-      WiFiClient client = server.available();   
+     if(true){
+        ejecao();
+     }else{
+         page();
+     }
+     delay(10);
+  } 
+}
+
+void page(){
+      WiFiClient client = server.available(); 
       if (client) {                             
         currentTime = millis();
         previousTime = currentTime;
@@ -91,6 +101,4 @@ void loopCore1(void *arg ){
         client.stop();
         
       }
-     }
-      delay(10); 
-}
+ }

@@ -3,7 +3,7 @@ Desenvolvimento do projeto de Altímetro PRD v0
 
 Acabou que virou um outro produto completamente completo kk
 
-## Como está até agora: 
+## Como estava:
 
 Esquemático do circuito:
 
@@ -20,3 +20,7 @@ Visão 3D superior:
 Visão 3D inferior:
 
 ![PCB3](AltPRD_v0/AltPRDv0/PCB3.png)
+
+Como ficou:
+
+![pig_v2](AltPRD_v0/AltPRDv0/pig_v2.png)

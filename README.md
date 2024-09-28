@@ -1,7 +1,7 @@
 # AltPRD
 Desenvolvimento do projeto de Altímetro PRD v0 
 
-Última revisão: 02/04 às 20h
+Acabou que virou um outro produto completamente completo kk
 
 ## Como está até agora: 
 

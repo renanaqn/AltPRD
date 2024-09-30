@@ -21,6 +21,6 @@ Visão 3D inferior:
 
 ![PCB3](AltPRD_v0/AltPRDv0/PCB3.png)
 
-Como ficou:
+## Como ficou:
 
 ![pig_v2](AltPRD_v0/AltPRDv0/pig_v2.png)
